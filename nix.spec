@@ -14,6 +14,7 @@ Source0:        https://github.com/NixOS/nix/archive/%{git_sha}.tar.gz
 
 BuildRequires:  autoconf
 BuildRequires:  autoconf-archive
+BuildRequires:  automake
 BuildRequires:  bison
 BuildRequires:  chrpath
 BuildRequires:  boost-devel
@@ -24,6 +25,7 @@ BuildRequires:  flex
 BuildRequires:  gc-devel
 BuildRequires:  gcc-c++
 BuildRequires:  gtest-devel
+BuildRequires:  jq
 BuildRequires:  libarchive-devel
 BuildRequires:  libcpuid-devel
 BuildRequires:  libcurl-devel
