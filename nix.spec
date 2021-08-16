@@ -66,6 +66,10 @@ make %{?_smp_mflags}
 make DESTDIR=%{buildroot} install
 mkdir -p %{buildroot}/nix/store
 
+# Remove RPATHs for check-rpaths
+chrpath -d %{buildroot}/usr/bin/nix
+chrpath -d %{buildroot}/usr/lib64/*.so
+
 %pre
 # Setup build group
 if ! getent group "nixbld" >/dev/null; then
