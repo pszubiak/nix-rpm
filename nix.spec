@@ -30,6 +30,7 @@ BuildRequires:  libarchive-devel
 BuildRequires:  libcpuid-devel
 BuildRequires:  libcurl-devel
 BuildRequires:  libseccomp-devel
+BuildRequires:  libsodium-devel
 BuildRequires:  lowdown-devel
 BuildRequires:  openssl-devel
 BuildRequires:  sqlite-devel
