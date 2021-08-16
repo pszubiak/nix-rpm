@@ -12,6 +12,7 @@ URL:            https://nixos.org/nix
 %undefine       _disable_source_fetch
 Source0:        https://github.com/NixOS/nix/archive/%{git_sha}.tar.gz
 
+BuildRequires:  autoconf
 BuildRequires:  autoconf-archive
 BuildRequires:  bison
 BuildRequires:  chrpath
