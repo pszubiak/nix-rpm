@@ -77,14 +77,17 @@ export INFOPATH=/opt/rh/gcc-toolset-9/root/usr/share/info${INFOPATH:+:${INFOPATH
 export PCP_DIR=/opt/rh/gcc-toolset-9/root
 export LD_LIBRARY_PATH=/opt/rh/gcc-toolset-9/root$rpmlibdir$rpmlibdir32${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
 export PKG_CONFIG_PATH=/opt/rh/gcc-toolset-9/root/usr/lib64/pkgconfig${PKG_CONFIG_PATH:+:${PKG_CONFIG_PATH}}
+export LD=/opt/rh/gcc-toolset-9/root/usr/bin/ld
 %endif
 
-./bootstrap.sh
-%undefine _hardened_build
 %if 0%{?rhel}
 export GTEST_CFLAGS=" -I/usr/include/gtest"
 export GTEST_LIBS=" -lgtest -lgtest_main"
 %endif
+
+%undefine _hardened_build
+
+./bootstrap.sh
 %configure --disable-doc-gen --localstatedir=/nix/var
 make %{?_smp_mflags}
 
