@@ -30,8 +30,12 @@ BuildRequires:  gc-devel
 %if 0%{?fedora}
 BuildRequires:  gcc-c++
 %endif
-%if 0%{?rhel} <= 8
+%if 0%{?el8}
 BuildRequires:  gcc-toolset-9-gcc-c++
+%endif
+%if 0%{?el7}
+BuildRequires:  centos-release-scl
+BuildRequires:  devtoolset-9
 %endif
 BuildRequires:  gtest-devel
 BuildRequires:  jq
