@@ -30,7 +30,7 @@ BuildRequires:  gc-devel
 %if 0%{?fedora}
 BuildRequires:  gcc-c++
 %endif
-%if 0%{?el8}
+%if 0%{?rhel} <= 8
 BuildRequires:  gcc-toolset-9-gcc-c++
 %endif
 BuildRequires:  gtest-devel
@@ -67,7 +67,7 @@ developing applications that use %{name}.
 %build
 # Enalbe GCC 9 for RHEL
 %if 0%{?el8}
-scl enable gcc-toolset-9
+scl load gcc-toolset-9
 %endif
 
 ./bootstrap.sh
