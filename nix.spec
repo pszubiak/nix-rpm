@@ -9,7 +9,6 @@ Summary:        Nix is a purely functional package manager
 
 License:        LGPLv2+
 URL:            https://nixos.org/nix
-%undefine       _disable_source_fetch
 Source0:        https://github.com/NixOS/nix/archive/%{git_sha}.tar.gz
 # Unsafe hack to make build pass on EL 7
 # Probably nobody would notice it anyway ;-)
@@ -28,7 +27,12 @@ BuildRequires:  bzip2-devel
 BuildRequires:  editline-devel
 BuildRequires:  flex
 BuildRequires:  gc-devel
+%if 0%{?fedora}
 BuildRequires:  gcc-c++
+%endif
+%if 0%{?rhel}
+BuildRequires:  gcc-toolset-9-gcc-c++
+%endif
 BuildRequires:  gtest-devel
 BuildRequires:  jq
 BuildRequires:  libarchive-devel
