@@ -11,6 +11,11 @@ License:        LGPLv2+
 URL:            https://nixos.org/nix
 %undefine       _disable_source_fetch
 Source0:        https://github.com/NixOS/nix/archive/%{git_sha}.tar.gz
+# Unsafe hack to make build pass on EL 7
+# Probably nobody would notice it anyway ;-)
+%if 0%{?el7}
+Patch0:         nix-2.4-el7-boost-version.patch
+%endif
 
 BuildRequires:  autoconf
 BuildRequires:  autoconf-archive
@@ -52,12 +57,16 @@ developing applications that use %{name}.
 
 
 %prep
-%setup -n %{name}-%{git_sha}
+%autosetup -n %{name}-%{git_sha}
 
 
 %build
 ./bootstrap.sh
 %undefine _hardened_build
+%if 0%{?rhel}
+export GTEST_CFLAGS=" -I/usr/include/gtest"
+export GTEST_LIBS=" -lgtest -lgtest_main"
+%endif
 %configure --disable-doc-gen --localstatedir=/nix/var
 make %{?_smp_mflags}
 
