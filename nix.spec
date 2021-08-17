@@ -13,7 +13,7 @@ Source0:        https://github.com/NixOS/nix/archive/%{git_sha}.tar.gz
 # Unsafe hack to make build pass on EL 7
 # Probably nobody would notice it anyway ;-)
 %if 0%{?el7}
-Patch0:         nix-2.4-el7-boost-version.patch
+Patch0:         https://raw.githubusercontent.com/pszubiak/nix-rpm/master/nix-2.4-el7-boost-version.patch
 %endif
 
 BuildRequires:  autoconf
@@ -87,11 +87,21 @@ export GTEST_LIBS=" -lgtest -lgtest_main"
 %undefine _hardened_build
 
 ./bootstrap.sh
-%configure CXXFLAGS="-std=c++17" --disable-doc-gen --localstatedir=/nix/var
+%configure --disable-doc-gen --localstatedir=/nix/var
 make V=1 %{?_smp_mflags}
 
 
 %install
+# Enalbe GCC 9 for RHEL
+%if 0%{?el8}
+export PATH=/opt/rh/gcc-toolset-9/root/usr/bin${PATH:+:${PATH}}
+export MANPATH=/opt/rh/gcc-toolset-9/root/usr/share/man:${MANPATH}
+export INFOPATH=/opt/rh/gcc-toolset-9/root/usr/share/info${INFOPATH:+:${INFOPATH}}
+export PCP_DIR=/opt/rh/gcc-toolset-9/root
+export LD_LIBRARY_PATH=/opt/rh/gcc-toolset-9/root$rpmlibdir$rpmlibdir32${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+export PKG_CONFIG_PATH=/opt/rh/gcc-toolset-9/root/usr/lib64/pkgconfig${PKG_CONFIG_PATH:+:${PKG_CONFIG_PATH}}
+%endif
+
 make DESTDIR=%{buildroot} install
 mkdir -p %{buildroot}/nix/store
 
