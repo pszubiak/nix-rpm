@@ -27,7 +27,7 @@ BuildRequires:  bzip2-devel
 BuildRequires:  editline-devel
 BuildRequires:  flex
 BuildRequires:  gc-devel
-%if 0%{?fedora}
+%if 0%{?fedora} || 0%{?eln}
 BuildRequires:  gcc-c++
 %endif
 %if 0%{?el8}
@@ -71,7 +71,10 @@ developing applications that use %{name}.
 %build
 # Enalbe GCC 9 for RHEL
 %if 0%{?el8}
-scl load gcc-toolset-9
+export PATH=/opt/rh/gcc-toolset-9/root/usr/bin${PATH:+:${PATH}}
+export MANPATH=/opt/rh/gcc-toolset-9/root/usr/share/man:${MANPATH}
+export INFOPATH=/opt/rh/gcc-toolset-9/root/usr/share/info${INFOPATH:+:${INFOPATH}}
+export PCP_DIR=/opt/rh/gcc-toolset-9/root
 %endif
 
 ./bootstrap.sh
