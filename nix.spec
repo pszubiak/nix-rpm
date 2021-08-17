@@ -87,7 +87,6 @@ export INFOPATH=/opt/rh/devtoolset-9/root/usr/share/info${INFOPATH:+:${INFOPATH}
 export PCP_DIR=/opt/rh/devtoolset-9/root
 export LD_LIBRARY_PATH=/opt/rh/devtoolset-9/root/usr/lib64:/opt/rh/devtoolset-9/root/usr/lib/gcc/x86_64-redhat-linux/9:${LD_LIBRARY_PATH}
 export PKG_CONFIG_PATH=/opt/rh/devtoolset-9/root/usr/lib64/pkgconfig${PKG_CONFIG_PATH:+:${PKG_CONFIG_PATH}}
-export LDFLAGS="-l:libc++.a"
 export CXXFLAGS="-static-libstdc++"
 %endif
 
@@ -120,8 +119,7 @@ export INFOPATH=/opt/rh/devtoolset-9/root/usr/share/info${INFOPATH:+:${INFOPATH}
 export PCP_DIR=/opt/rh/devtoolset-9/root
 export LD_LIBRARY_PATH=/opt/rh/devtoolset-9/root/usr/lib64:/opt/rh/devtoolset-9/root/usr/lib/gcc/x86_64-redhat-linux/9:${LD_LIBRARY_PATH}
 export PKG_CONFIG_PATH=/opt/rh/devtoolset-9/root/usr/lib64/pkgconfig${PKG_CONFIG_PATH:+:${PKG_CONFIG_PATH}}
-export LDFLAGS="-l:libc++.a"
-export CXXFLAGS="-static-libstdc++ -static-libgcc"
+export CXXFLAGS="-static-libstdc++"
 %endif
 
 make DESTDIR=%{buildroot} install
