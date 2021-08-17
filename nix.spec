@@ -12,9 +12,7 @@ URL:            https://nixos.org/nix
 Source0:        https://github.com/NixOS/nix/archive/%{git_sha}.tar.gz
 # Unsafe hack to make build pass on EL 7
 # Probably nobody would notice it anyway ;-)
-%if 0%{?el7}
-Patch0:         https://raw.githubusercontent.com/pszubiak/nix-rpm/master/nix-2.4-el7-boost-version.patch
-%endif
+Patch0:         nix-2.4-el7-boost-version.patch
 
 BuildRequires:  autoconf
 BuildRequires:  autoconf-archive
@@ -65,7 +63,11 @@ developing applications that use %{name}.
 
 
 %prep
-%autosetup -n %{name}-%{git_sha}
+%setup -q -n %{name}-%{git_sha}
+
+%if 0%{?el7}
+%patch0 -p1
+%endif
 
 
 %build
