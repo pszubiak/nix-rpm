@@ -80,6 +80,14 @@ export PCP_DIR=/opt/rh/gcc-toolset-9/root
 export LD_LIBRARY_PATH=/opt/rh/gcc-toolset-9/root$rpmlibdir$rpmlibdir32${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
 export PKG_CONFIG_PATH=/opt/rh/gcc-toolset-9/root/usr/lib64/pkgconfig${PKG_CONFIG_PATH:+:${PKG_CONFIG_PATH}}
 %endif
+%if 0%{?el7}
+export PATH=/opt/rh/devtoolset-9/root/usr/bin${PATH:+:${PATH}}
+export MANPATH=/opt/rh/devtoolset-9/root/usr/share/man:${MANPATH}
+export INFOPATH=/opt/rh/devtoolset-9/root/usr/share/info${INFOPATH:+:${INFOPATH}}
+export PCP_DIR=/opt/rh/devtoolset-9/root
+export LD_LIBRARY_PATH=/opt/rh/devtoolset-9/root$rpmlibdir$rpmlibdir32${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+export PKG_CONFIG_PATH=/opt/rh/devtoolset-9/root/usr/lib64/pkgconfig${PKG_CONFIG_PATH:+:${PKG_CONFIG_PATH}}
+%endif
 
 %if 0%{?rhel}
 export GTEST_CFLAGS=" -I/usr/include/gtest"
@@ -102,6 +110,14 @@ export INFOPATH=/opt/rh/gcc-toolset-9/root/usr/share/info${INFOPATH:+:${INFOPATH
 export PCP_DIR=/opt/rh/gcc-toolset-9/root
 export LD_LIBRARY_PATH=/opt/rh/gcc-toolset-9/root$rpmlibdir$rpmlibdir32${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
 export PKG_CONFIG_PATH=/opt/rh/gcc-toolset-9/root/usr/lib64/pkgconfig${PKG_CONFIG_PATH:+:${PKG_CONFIG_PATH}}
+%endif
+%if 0%{?el7}
+export PATH=/opt/rh/devtoolset-9/root/usr/bin${PATH:+:${PATH}}
+export MANPATH=/opt/rh/devtoolset-9/root/usr/share/man:${MANPATH}
+export INFOPATH=/opt/rh/devtoolset-9/root/usr/share/info${INFOPATH:+:${INFOPATH}}
+export PCP_DIR=/opt/rh/devtoolset-9/root
+export LD_LIBRARY_PATH=/opt/rh/devtoolset-9/root$rpmlibdir$rpmlibdir32${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+export PKG_CONFIG_PATH=/opt/rh/devtoolset-9/root/usr/lib64/pkgconfig${PKG_CONFIG_PATH:+:${PKG_CONFIG_PATH}}
 %endif
 
 make DESTDIR=%{buildroot} install
