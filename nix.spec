@@ -98,6 +98,10 @@ mkdir -p %{buildroot}/nix/store
 chrpath -d %{buildroot}/usr/bin/nix
 chrpath -d %{buildroot}/usr/lib64/*.so
 
+%check
+make check
+make installcheck
+
 %pre
 # Setup build group
 if ! getent group "nixbld" >/dev/null; then
@@ -130,5 +134,5 @@ done
 
 
 %changelog
-* Fri Aug 13 2021 Piotr Szubiakowski - 2.4.0~1-1
+* Fri Aug 13 2021 Piotr Szubiakowski - 2.4.0~1.g2cd1a5b8
 - adjust upstream spec file
