@@ -13,6 +13,7 @@ BuildRequires:  autoconf
 BuildRequires:  autoconf-archive
 BuildRequires:  automake
 BuildRequires:  bison
+BuildRequires:  busybox
 BuildRequires:  chrpath
 BuildRequires:  boost-devel
 BuildRequires:  brotli-devel
@@ -75,7 +76,7 @@ export GTEST_LIBS=" -lgtest -lgtest_main"
 %undefine _hardened_build
 
 ./bootstrap.sh
-%configure --disable-doc-gen --localstatedir=/nix/var
+%configure --disable-doc-gen --localstatedir=/nix/var --with-sandbox-shell=/sbin/busybox
 make %{?_smp_mflags}
 
 
