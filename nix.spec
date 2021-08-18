@@ -100,7 +100,7 @@ chrpath -d %{buildroot}/usr/lib64/*.so
 
 %check
 make check
-make installcheck
+
 
 %pre
 # Setup build group
