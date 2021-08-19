@@ -93,7 +93,26 @@ export PKG_CONFIG_PATH=/opt/rh/gcc-toolset-9/root/usr/lib64/pkgconfig${PKG_CONFI
 %endif
 
 make DESTDIR=%{buildroot} install
+
+# Create Nix store
 mkdir -p %{buildroot}/nix/store
+
+# Remove init scripts
+rm -r %{buildroot}%{_sysconfdir}/init
+
+# fix permission of nix profile
+# (until this is fixed in the relevant Makefile)
+chmod -x %{buildroot}%{_sysconfdir}/profile.d/nix.sh
+
+# make per-user directories
+for d in profiles gcroots;
+do
+  mkdir -p %{buildroot}/nix/var/nix/$d/per-user
+  chmod 1777 %{buildroot}/nix/var/nix/$d/per-user
+done
+for i in db temproots ; do
+  mkdir %{buildroot}/nix/var/nix/$i
+done
 
 # Remove RPATHs for check-rpaths
 chrpath -d %{buildroot}/usr/bin/nix
@@ -126,8 +145,16 @@ done
 %{_prefix}/lib/systemd/system/*
 %config(noreplace) %{_sysconfdir}/*
 %{_datadir}/*
-/nix
-
+%dir /nix
+%attr(1775,root,nixbld) /nix/store
+%dir /nix/var
+%dir /nix/var/log
+%dir /nix/var/log/nix
+%attr(1775,root,nixbld) %dir /nix/var/log/nix/drvs
+%dir %attr(775,root,nixbld) /nix/var/nix
+%ghost /nix/var/nix/daemon-socket/socket
+%attr(775,root,nixbld) /nix/var/nix/temproots
+%attr(775,root,nixbld) /nix/var/nix/db
 
 %files devel
 %{_includedir}/nix
@@ -135,7 +162,8 @@ done
 
 
 %changelog
-* Fri Aug 13 2021 Piotr Szubiakowski - 2.4.0~1.g2cd1a5b8-2
+* Thu Aug 19 2021 Piotr Szubiakowski - 2.4.0~1.g2cd1a5b8-2
 - make busybox a runtime dependency
+- remove init files
 * Fri Aug 13 2021 Piotr Szubiakowski - 2.4.0~1.g2cd1a5b8-1
 - adjust upstream spec file
