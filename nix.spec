@@ -2,7 +2,7 @@
 
 Name:           nix
 Version:        2.4.0~1.g2cd1a5b8
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Nix is a purely functional package manager
 
 License:        LGPLv2+
@@ -13,7 +13,6 @@ BuildRequires:  autoconf
 BuildRequires:  autoconf-archive
 BuildRequires:  automake
 BuildRequires:  bison
-BuildRequires:  busybox
 BuildRequires:  chrpath
 BuildRequires:  boost-devel
 BuildRequires:  brotli-devel
@@ -38,6 +37,8 @@ BuildRequires:  lowdown-devel
 BuildRequires:  openssl-devel
 BuildRequires:  sqlite-devel
 BuildRequires:  xz-devel
+
+Requires:       busybox
 
 
 %description
@@ -134,5 +135,7 @@ done
 
 
 %changelog
-* Fri Aug 13 2021 Piotr Szubiakowski - 2.4.0~1.g2cd1a5b8
+* Fri Aug 13 2021 Piotr Szubiakowski - 2.4.0~1.g2cd1a5b8-2
+- make busybox a runtime dependency
+* Fri Aug 13 2021 Piotr Szubiakowski - 2.4.0~1.g2cd1a5b8-1
 - adjust upstream spec file
