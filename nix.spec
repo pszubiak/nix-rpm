@@ -148,9 +148,6 @@ done
 %dir /nix
 %attr(1775,root,nixbld) /nix/store
 %dir /nix/var
-%dir /nix/var/log
-%dir /nix/var/log/nix
-%attr(1775,root,nixbld) %dir /nix/var/log/nix/drvs
 %dir %attr(775,root,nixbld) /nix/var/nix
 %ghost /nix/var/nix/daemon-socket/socket
 %attr(775,root,nixbld) /nix/var/nix/temproots
@@ -165,5 +162,7 @@ done
 * Thu Aug 19 2021 Piotr Szubiakowski - 2.4.0~1.g2cd1a5b8-2
 - make busybox a runtime dependency
 - remove init files
+- crete /nix/var structure
+
 * Fri Aug 13 2021 Piotr Szubiakowski - 2.4.0~1.g2cd1a5b8-1
 - adjust upstream spec file
